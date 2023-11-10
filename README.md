@@ -88,4 +88,9 @@ Build and commission Lighting App sample following instructions:
 - [nRF52840 example](https://github.com/project-chip/connectedhomeip/tree/master/examples/lighting-app/nrfconnect)
 - [ESP32-C6 example](https://github.com/project-chip/connectedhomeip/tree/master/examples/lighting-app/esp32)
 
-![Ping recording](files/homeassistant.mp4)
+Alternatively [HA SkyConnect](https://www.home-assistant.io/skyconnect/) dongle can be used for Matter integration.
+
+[Home Assistant recording](files/homeassistant.mp4)
+
+### Matter Commissioning
+
