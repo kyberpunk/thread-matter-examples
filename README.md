@@ -26,3 +26,29 @@ Development board with Mater Lighting example:
 
 ![Example setup](files/overview.drawio.png)
 
+## Examples
+
+### Thread commissioning
+
+https://openthread.io/guides/border-router/external-commissioning
+
+Based on OpenThread CLI example. OTBR web GUI or [Android commissioning App example](https://thread-thread-group.en.aptoide.com/app) can be used for external commissioning.
+
+QR Code format:
+```
+v=1&&eui=f4ce36d7ad8edb94&&cc=J01NU5
+```
+
+OpenThread CLI command:
+```
+ifconfig up
+panid 0xffff
+joiner start J01NU5
+```
+
+Start network after successfull joining:
+```
+thread start
+```
+
+![Thread commissioning recording](files/commissioning.gif)
