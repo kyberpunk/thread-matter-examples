@@ -1,0 +1,15 @@
+dependencies:
+- name: hono
+  repository: https://eclipse.org/packages/charts/
+  version: 2.5.6
+- name: ditto
+  repository: oci://registry-1.docker.io/eclipse
+  version: 3.3.7
+- name: kafka
+  repository: https://charts.bitnami.com/bitnami
+  version: 25.3.1
+- name: kafka-ui
+  repository: https://provectus.github.io/kafka-ui-charts
+  version: 0.7.5
+digest: sha256:f69f6faa3547360281016a69cd26ee99045412c541e13a85be57414532286301
+generated: "2023-11-07T19:07:24.812236803+01:00"

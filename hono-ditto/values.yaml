@@ -1,0 +1,109 @@
+ditto:
+  # Nginx controller only
+  ingress:
+    enabled: false
+    host: example.domain.com
+  
+  global:
+    basicAuthUsers:
+      ditto:
+        user: ditto
+        password: ditto
+    logging:
+      customConfigFile:
+        enabled: false
+
+  gateway:
+    config:
+      authentication:
+        devops:
+          devopsPassword: devops
+          statusPassword: status
+
+  mongodb:
+    persistence:
+      enabled: true
+
+  connectivity:
+    resources:
+      cpu: 1
+      memoryMi: 2048
+
+hono:
+  serviceType: ClusterIP
+  useLoadBalancer: true
+  messagingNetworkTypes:
+    - kafka
+  kafkaMessagingClusterExample:
+    enabled: false
+  amqpMessagingNetworkExample:
+    enabled: false
+  deviceRegistryExample:
+    addExampleData: false
+    mongoDBBasedDeviceRegistry:
+      mongodb:
+        host: demo-mongodb
+        port: 27017
+        dbName: hono
+  adapters:
+    amqp:
+      enabled: false
+    http:
+      enabled: false
+    mqtt:
+      enabled: false
+    coap:
+      enabled: true
+      tlsKeysSecret: demo-eclipse-hono-ditto-example-coap-certificates
+    kafkaMessagingSpec:
+      commonClientConfig:
+        bootstrap.servers: "demo-kafka:9092"
+  prometheus:
+    createInstance: false
+  grafana:
+    enabled: false
+
+kafka:
+  extraConfig: |
+    auto.create.topics.enable=true
+    delete.topic.enable=true
+    offsets.topic.replication.factor=1
+    transaction.state.log.replication.factor=1
+  controller:
+    replicaCount: 1
+    heapOpts: "-Xmx512m -Xms512m"
+    resources:
+      requests:
+        cpu: 250m
+        memory: 704Mi
+      limits:
+        cpu: 1
+        memory: 1024Mi
+  listeners:
+    client:
+      protocol: PLAINTEXT
+    controller:
+      protocol: PLAINTEXT
+    interbroker:
+      protocol: PLAINTEXT
+  kraft:
+    clusterId: kafka_cluster_id_test1
+
+kafka-ui:
+  envs:
+    config:
+      KAFKA_CLUSTERS_0_NAME: demo
+      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: demo-kafka:9092
+  resources:
+    requests:
+      cpu: 200m
+      memory: 256Mi
+    limits:
+      cpu: 400m
+      memory: 512Mi
+
+# Configuration of istio ingress
+ingress:
+  host: example.domain.com
+  istio:
+    enabled: true
