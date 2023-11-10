@@ -137,3 +137,32 @@ coaps post telemetry con {"topic":"default/PXC3.E75-100A/things/twin/commands/mo
 ```
 
 ![CoAP recording](files/coap.gif)
+
+### MQTT-SN
+
+Following fork [kyberpunk/openthread](https://github.com/kyberpunk/openthread) must be used for building the examples.
+
+Subscribe MQTT topic in OpenThread CLI:
+```
+mqtt start
+mqtt connect fdf1:eba9:89c5:1:ca04:d50a:9bb6:444d 10000
+mqtt subscribe test
+```
+
+Publish message to topic from mosquitto client:
+```
+mosquitto_pub -h 127.0.0.1 -p 1883 -t test -m "message"
+```
+
+Subscribe to topic from mosquitto client:
+```
+mosquitto_sub -h 127.0.0.1 -p 1883 -t publish
+```
+
+Publish to MQTT topic in OpenThread CLI:
+```
+mqtt register publish
+mqtt publish @2 1 message
+```
+
+![MQTT-SN recording](files/mqtt-sn.gif)
