@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "eclipse-hono-ditto-example.fullname" . }}-coap
+spec:
+  selector:
+    app.kubernetes.io/component: adapter-coap
+    app.kubernetes.io/instance: demo
+  type: NodePort
+  ports:
+  - name: coaps
+    port: 5684
+    protocol: UDP
+    targetPort: coaps
+    nodePort: 30684

@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: "{{ include "eclipse-hono-ditto-example.fullname" . }}-coap-certificates"
+type: Opaque
+data:
+  tls.key: {{ .Files.Get "certs/key.pem" | b64enc }}
+  tls.crt: {{ .Files.Get "certs/cert.pem" | b64enc }}

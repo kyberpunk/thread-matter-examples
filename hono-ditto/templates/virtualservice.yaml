@@ -1,0 +1,73 @@
+{{- if .Values.ingress.istio.enabled }}
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: {{ include "eclipse-hono-ditto-example.fullname" . }}
+spec:
+  gateways:
+  - {{ include "eclipse-hono-ditto-example.fullname" . }}
+  hosts:
+  - {{ .Values.ingress.host }}
+  http:
+  - match:
+    - uri:
+        prefix: "/devops"
+    - uri:
+        prefix: "/status"
+    - uri:
+        prefix: "/health"
+    - uri:
+        prefix: "/api/2/connections"
+    route:
+    - destination:
+        host: {{ .Release.Name }}-ditto-gateway
+        port:
+          number: 8080
+  - match:
+    - uri:
+        prefix: "/api/2/"
+    - uri:
+        prefix: "/stats"
+    - uri:
+        prefix: "/overall"
+    - uri:
+        prefix: "/ws"
+    - uri:
+        exact: "/"
+    - uri:
+        exact: "/index.html"
+    - uri:
+        exact: "/ditto-up.svg"
+    - uri:
+        exact: "/ditto-down.svg"
+    route:
+    - destination:
+        host: {{ .Release.Name }}-ditto-nginx
+        port:
+          number: 8080
+  - match:
+    - uri:
+        prefix: "/apidoc"
+    rewrite:
+      uri: "/"
+    route:
+    - destination:
+        host: {{ .Release.Name }}-ditto-swaggerui
+        port:
+          number: 8080
+  - match:
+    - uri:
+        prefix: "/ui"
+    rewrite:
+      uri: "/"
+    route:
+    - destination:
+        host: {{ .Release.Name }}-ditto-dittoui
+        port:
+          number: 8080
+  - route:
+    - destination:
+        host: {{ .Release.Name }}-ditto-dittoui
+        port:
+          number: 8080
+{{- end }}

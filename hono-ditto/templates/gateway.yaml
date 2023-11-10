@@ -1,0 +1,16 @@
+apiVersion: networking.istio.io/v1alpha3
+{{- if .Values.ingress.istio.enabled }}
+kind: Gateway
+metadata:
+  name: {{ include "eclipse-hono-ditto-example.fullname" . }}
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+  - port:
+      number: 80
+      name: http
+      protocol: HTTP
+    hosts:
+    - {{ .Values.ingress.host }}
+{{- end }}
