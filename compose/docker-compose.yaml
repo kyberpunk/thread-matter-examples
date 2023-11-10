@@ -1,0 +1,47 @@
+version: '3.8'
+services:
+  mosquitto:
+    image: "eclipse-mosquitto:2"
+    restart: always
+    ports:
+      - "1883:1883"
+    volumes:
+      - "/home/pi/docker/mosquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf:ro"
+    networks:
+      docker_net:
+        ipv4_address: 10.0.0.2 
+  paho:
+    image: "kyberpunk/paho:udp6"
+    restart: always
+    depends_on:
+      - mosquitto
+    privileged: true
+    volumes:
+      - "/home/pi/docker/paho/gateway.conf:/etc/paho/gateway.conf:ro"
+    network_mode: "host"
+    #networks:
+    #  docker_net:
+    #    ipv4_address: 10.0.0.3
+  matter-server:
+    image: "ghcr.io/home-assistant-libs/python-matter-server:stable"
+    restart: always
+    volumes:
+      - "/run/dbus:/run/dbus:ro"
+      - "/home/pi/docker/matter-server/data:/data"
+    network_mode: "host"
+    security_opt:
+      - apparmor:unconfined
+  homeassistant:
+    image: ghcr.io/home-assistant/home-assistant:stable
+    restart: always
+    volumes:
+      - "/etc/localtime:/etc/localtime:ro"
+      - "/home/pi/docker/homeassistant/config:/config"
+      - "/run/dbus:/run/dbus:ro"
+    network_mode: "host"
+networks:
+  docker_net:
+    ipam:
+      driver: default
+      config:
+        - subnet: 10.0.0.0/24 
