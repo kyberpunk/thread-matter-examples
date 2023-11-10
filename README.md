@@ -90,7 +90,10 @@ Build and commission Lighting App sample following instructions:
 
 Alternatively [HA SkyConnect](https://www.home-assistant.io/skyconnect/) dongle can be used for Matter integration.
 
+![Home Assistant](files/homeassistant-153.jpeg)
+
 [Home Assistant recording](files/homeassistant.mp4)
 
-### Matter Commissioning
+### Home Assistant Matter Commissioning
 
+[![Home Assistant Matter Commissioning](https://img.youtube.com/vi/Fk0n0r0eKcE/0.jpg)](https://www.youtube.com/watch?v=Fk0n0r0eKcE)
