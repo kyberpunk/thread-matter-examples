@@ -52,3 +52,28 @@ thread start
 ```
 
 ![Thread commissioning recording](files/commissioning.gif)
+
+### Thread internetworking
+
+Based on OpenThread CLI example.
+
+Ping command to OTBR gateway in OpenThread CLI:
+```
+ping fdf1:eba9:89c5:1:ca04:d50a:9bb6:444d
+```
+
+Opposite ping request from Raspberry Pi:
+```
+ping6 fdae:5a06:af86:5322:82af:21fe:6700:b51c
+```
+
+![Ping recording](files/ping.gif)
+
+Communication to the Internet (with NAT64):
+```
+ping 8.8.8.8
+dns resolve google.com 8.8.8.8
+curl http://httpbin.org/get
+```
+
+![Ping recording](files/internet.gif)
