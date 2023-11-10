@@ -77,3 +77,15 @@ curl http://httpbin.org/get
 ```
 
 ![Ping recording](files/internet.gif)
+
+### Matter in Home Assistant
+
+Setup Home Assistant integrations:
+- [Thread](https://www.home-assistant.io/integrations/thread/)
+- [Matter](https://www.home-assistant.io/integrations/matter/)
+
+Build and commission Lighting App sample following instructions:
+- [nRF52840 example](https://github.com/project-chip/connectedhomeip/tree/master/examples/lighting-app/nrfconnect)
+- [ESP32-C6 example](https://github.com/project-chip/connectedhomeip/tree/master/examples/lighting-app/esp32)
+
+![Ping recording](files/homeassistant.mp4)
